@@ -112,6 +112,7 @@ h3 { font-size: 1.35rem; }
   align-items: center;
   justify-content: space-between;
   padding: 18px 0;
+  height: 85px;
 }
 
 .logo {
@@ -122,10 +123,11 @@ h3 { font-size: 1.35rem; }
 }
 
 .logo-image {
-  height: 65px;
+  height: 75px;
   width: auto;
   max-width: 200px;
   display: block;
+  margin-left: 1rem;
 }
 
 /* ===== Menu ===== */
@@ -174,6 +176,7 @@ h3 { font-size: 1.35rem; }
   cursor: pointer;
   color: var(--noir);
   padding: 4px;
+  margin-right: 1.5rem;
 }
 
 .bouton-menu-mobile:focus-visible {
@@ -255,6 +258,7 @@ h3 { font-size: 1.35rem; }
   color: var(--gris-600);
   max-width: 540px;
   line-height: 1.7;
+  text-align: justify;
 }
 
 .hero-actions {
@@ -342,6 +346,18 @@ h3 { font-size: 1.35rem; }
   margin-top: 16px;
   font-size: 1.05rem;
   line-height: 1.7;
+}
+
+/* ============================================
+   STYLE POUR LE "&" (esperluette)
+   ============================================ */
+.esperluette {
+  font-family: 'Georgia', 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 700;
+  color: var(--noir);
+  font-size: 1.1em;
+  letter-spacing: 0.05em;
 }
 
 /* ============================================
@@ -492,6 +508,7 @@ h3 { font-size: 1.35rem; }
   margin-bottom: 18px;
   font-size: 1rem;
   line-height: 1.7;
+  text-align: justify;
 }
 
 .apropos-contenu p strong {
