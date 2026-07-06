@@ -419,6 +419,121 @@ h3 { font-size: 1.35rem; }
   line-height: 1.6;
 }
 
+/* ============================================
+   À PROPOS
+   ============================================ */
+.section-alt {
+  background: var(--gris-50);
+}
+
+.grille-apropos {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  align-items: start;
+}
+
+/* ===== Colonne gauche : citation ===== */
+.apropos-visuel {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: var(--rayon-lg);
+  background: linear-gradient(135deg, var(--couleur-primaire), var(--noir));
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: var(--blanc);
+  overflow: hidden;
+}
+
+/* Cercle décoratif en arrière-plan */
+.apropos-visuel::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 260px;
+  height: 260px;
+  background: var(--couleur-accent);
+  border-radius: 50%;
+  opacity: 0.15;
+}
+
+.apropos-visuel .citation-icone {
+  font-size: 3rem;
+  color: var(--couleur-accent);
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.apropos-visuel blockquote {
+  font-family: var(--police-titre);
+  font-size: 1.25rem;
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.apropos-visuel cite {
+  font-style: normal;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Colonne droite : informations ===== */
+.apropos-contenu p {
+  color: var(--gris-600);
+  margin-bottom: 18px;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.apropos-contenu p strong {
+  color: var(--couleur-primaire);
+}
+
+.liste-infos {
+  list-style: none;
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 32px;
+}
+
+.liste-infos li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.liste-infos i {
+  color: var(--couleur-accent);
+  font-size: 1.1rem;
+  margin-top: 4px;
+  width: 20px;
+  flex-shrink: 0;
+}
+
+.info-libelle {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gris-500);
+  margin-bottom: 2px;
+}
+
+.info-valeur {
+  font-weight: 600;
+  color: var(--noir);
+  font-size: 0.95rem;
+}
 
 /* ===== Responsive ===== */
 @media (max-width: 900px) {
@@ -432,6 +547,26 @@ h3 { font-size: 1.35rem; }
   .hero-stats {
     gap: 24px;
     flex-wrap: wrap;
+  }
+
+  .grille-apropos {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .apropos-visuel {
+    aspect-ratio: 16/9;
+    min-height: 200px;
+    padding: 30px;
+  }
+
+  .apropos-visuel blockquote {
+    font-size: 1.1rem;
+  }
+
+  .liste-infos {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }
 
@@ -518,5 +653,30 @@ h3 { font-size: 1.35rem; }
     width: 48px;
     height: 48px;
     font-size: 1.2rem;
+  }
+
+  .apropos-visuel {
+    padding: 24px;
+    min-height: 180px;
+  }
+
+  .apropos-visuel .citation-icone {
+    font-size: 2.2rem;
+  }
+
+  .apropos-visuel blockquote {
+    font-size: 1rem;
+  }
+
+  .apropos-visuel cite {
+    font-size: 0.8rem;
+  }
+
+  .liste-infos {
+    gap: 12px;
+  }
+
+  .info-valeur {
+    font-size: 0.9rem;
   }
 }
