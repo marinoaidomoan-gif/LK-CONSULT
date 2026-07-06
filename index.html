@@ -12,8 +12,261 @@
     <meta name="author" content="LK CONSULT" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="/" />
+
+    <!--Open Graph-->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="LK CONSULT" />
+    <meta property="og:title" content="LK CONSULT — Cabinet d'études & Conseil stratégique au Bénin" />
+    <meta property="og:description" content="Études, formation, recherches et prestations intellectuelles depuis 2012 en République du Bénin." />
+    <meta property="og:url" content="/" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <!--Twitter-->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LK CONSULT — Cabinet d'études & Conseil" />
+    <meta name="twitter:description" content="Cabinet d'études spécialisé en politiques de développement, suivi-évaluation et statistiques sociales au Bénin." />
+
+    <!--Favicon (SVG inline)-->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230033A0'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' fill='white' font-family='Arial' font-size='28' font-weight='bold'%3ELK%3C/text%3E%3C/svg%3E" />
+
+    <!--Polices & icônes-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,700&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js">
+
+    </script>
+
+    <!--Données structurées (JSON‑LD)-->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "LK CONSULT",
+        "description": "Cabinet d'études spécialisé en formulation et évaluation de politiques de développement, statistiques sociales, suivi-évaluation et études pluridisciplinaires.",
+        "foundingDate": "2012-02-14",
+        "founder": { "@type": "Person", "name": "KOUHOUNDE S. Evrard Landry" },
+        "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Ilot C/SB, MS AMADOUDJA E Abomey — 03 BP 943",
+        "addressLocality": "Cotonou",
+        "addressCountry": "BJ"
+        },
+        "email": "lkconsultbenin@yahoo.fr",
+        "areaServed": "BJ"
+    }
+  </script>
 </head>
 <body>
-    
+    <!-- Lien d'évitement pour l'accessibilité -->
+    <a href="#contenu-principal" class="lien-evitement">Aller au contenu principal</a>
+
+    <header class="en-tete" role="banner" aria-label="En‑tête du site">
+        <div class="conteneur barre-nav">
+            <!-- Logo avec image -->
+            <a href="#accueil" class="logo" aria-label="LK CONSULT - Retour à l'accueil">
+            <img src="img/LK.png" alt="Logo LK CONSULT - Cabinet d'études et conseil en développement" class="logo-image" width="180" height="60" />
+            </a>
+
+            <nav aria-label="Navigation principale">
+            <ul class="menu-liste" id="menu-liste">
+                <li><a href="#accueil" class="menu-lien">Accueil</a></li>
+                <li><a href="#expertises" class="menu-lien">Expertises</a></li>
+                <li><a href="#apropos" class="menu-lien">À propos</a></li>
+                <li><a href="#realisations" class="menu-lien">Réalisations</a></li>
+                <li><a href="#contact" class="menu-lien">Contact</a></li>
+            </ul>
+            </nav>
+
+            <!-- Bouton menu mobile -->
+            <button class="bouton-menu-mobile" id="bouton-menu-mobile"
+                    aria-label="Ouvrir le menu"
+                    aria-expanded="false"
+                    aria-controls="menu-liste">
+            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Le reste du contenu sera ajouté progressivement -->
+    <main id="contenu-principal">
+        
+        <!-- ============================================
+            SECTION HERO (ACCUEIL)
+        ============================================ -->
+        <section class="hero" id="accueil" aria-labelledby="titre-hero">
+            <div class="conteneur hero-grille">
+                <div class="hero-contenu">
+                <!-- Badge -->
+                <span class="hero-etiquette">
+                    <i class="fa-solid fa-award" aria-hidden="true"></i> Cabinet d'études - Depuis 2012
+                </span>
+
+                <!-- Titre -->
+                <h1 class="hero-titre" id="titre-hero">
+                    Concevoir des <span>politiques</span> et stratégies qui transforment.
+                </h1>
+
+                <!-- Description -->
+                <p class="hero-texte">
+                    Cabinet d'études spécialisé dans la formulation et l'évaluation des politiques de
+                    développement, les statistiques sociales, le suivi‑évaluation et les études
+                    pluridisciplinaires au service des institutions et entreprises.
+                </p>
+
+                <!-- Boutons CTA -->
+                <div class="hero-actions">
+                    <a href="#contact" class="bouton bouton-primaire">
+                    Discutons de votre projet <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                    <a href="#expertises" class="bouton bouton-secondaire">Nos expertises</a>
+                </div>
+
+                <!-- Statistiques (avec sémantique de liste de définition) -->
+                <dl class="hero-stats">
+                    <div class="stat">
+                    <dt class="stat-libelle">Années d'expérience</dt>
+                    <dd class="stat-nombre">14+</dd>
+                    </div>
+                    <div class="stat">
+                    <dt class="stat-libelle">Missions livrées</dt>
+                    <dd class="stat-nombre">20+</dd>
+                    </div>
+                    <div class="stat">
+                    <dt class="stat-libelle">Domaines d'expertise</dt>
+                    <dd class="stat-nombre">10+</dd>
+                    </div>
+                </dl>
+                </div>
+
+                <!-- Illustration SVG (tableau de bord) -->
+                <div class="hero-visuel">
+                <svg class="hero-svg" viewBox="0 0 500 520" xmlns="http://www.w3.org/2000/svg"
+                    role="img" aria-label="Illustration de tableau de bord analytique">
+                    <defs>
+                    <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#0033A0"/>
+                        <stop offset="100%" stop-color="#1a4dbf"/>
+                    </linearGradient>
+                    <linearGradient id="grad2" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#FF8C00"/>
+                        <stop offset="100%" stop-color="#ffa733"/>
+                    </linearGradient>
+                    </defs>
+                    <circle cx="380" cy="120" r="90" fill="url(#grad2)" opacity="0.15"/>
+                    <circle cx="120" cy="420" r="70" fill="url(#grad1)" opacity="0.12"/>
+                    <rect x="60" y="80" width="340" height="220" rx="16" fill="#fff" stroke="#e5e5e5" stroke-width="1"/>
+                    <rect x="80" y="100" width="80" height="8" rx="4" fill="#0033A0"/>
+                    <rect x="80" y="118" width="140" height="6" rx="3" fill="#d4d4d4"/>
+                    <rect x="80" y="240" width="30" height="40" rx="4" fill="#d4d4d4"/>
+                    <rect x="120" y="210" width="30" height="70" rx="4" fill="#0033A0"/>
+                    <rect x="160" y="180" width="30" height="100" rx="4" fill="#FF8C00"/>
+                    <rect x="200" y="160" width="30" height="120" rx="4" fill="#0033A0"/>
+                    <rect x="240" y="200" width="30" height="80" rx="4" fill="#d4d4d4"/>
+                    <rect x="280" y="150" width="30" height="130" rx="4" fill="url(#grad1)"/>
+                    <rect x="320" y="190" width="30" height="90" rx="4" fill="#d4d4d4"/>
+                    <polyline points="95,250 135,220 175,190 215,170 255,210 295,160 335,200" fill="none" stroke="#FF8C00" stroke-width="2.5" stroke-linecap="round"/>
+                    <circle cx="335" cy="200" r="5" fill="#FF8C00"/>
+                    <rect x="260" y="330" width="200" height="130" rx="14" fill="#0a0a0a"/>
+                    <circle cx="285" cy="360" r="12" fill="#FF8C00"/>
+                    <rect x="305" y="354" width="120" height="6" rx="3" fill="#fff"/>
+                    <rect x="305" y="366" width="80" height="5" rx="2.5" fill="#525252"/>
+                    <rect x="280" y="390" width="160" height="4" rx="2" fill="#404040"/>
+                    <rect x="280" y="402" width="140" height="4" rx="2" fill="#404040"/>
+                    <rect x="280" y="414" width="100" height="4" rx="2" fill="#404040"/>
+                    <rect x="280" y="435" width="70" height="14" rx="7" fill="#FF8C00"/>
+                    <rect x="40" y="330" width="200" height="90" rx="14" fill="#fff" stroke="#e5e5e5"/>
+                    <circle cx="70" cy="365" r="18" fill="#0033A0"/>
+                    <path d="M62 365 l6 6 l12 -12" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <rect x="100" y="352" width="110" height="7" rx="3.5" fill="#0a0a0a"/>
+                    <rect x="100" y="366" width="80" height="5" rx="2.5" fill="#a3a3a3"/>
+                    <rect x="100" y="390" width="130" height="4" rx="2" fill="#e5e5e5"/>
+                    <rect x="100" y="400" width="90" height="4" rx="2" fill="#e5e5e5"/>
+                </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+            SECTION EXPERTISES
+            ============================================ -->
+        <section class="section expertises" id="expertises" aria-labelledby="titre-expertises">
+        <div class="conteneur">
+            <!-- En‑tête de section -->
+            <div class="entete-section">
+            <span class="surtitre">Nos expertises</span>
+            <h2 id="titre-expertises">Un accompagnement pluridisciplinaire, du diagnostic à l'évaluation.</h2>
+            <p>Six domaines d'intervention structurés pour répondre aux enjeux des institutions publiques, des collectivités et du secteur privé.</p>
+            </div>
+
+            <!-- Grille des cartes -->
+            <div class="grille-expertises">
+            <!-- Carte 1 : Politiques & Stratégies -->
+            <article class="carte-expertise">
+                <div class="icone-expertise" aria-hidden="true">
+                <i class="fa-solid fa-diagram-project"></i>
+                </div>
+                <h3>Politiques &amp; Stratégies</h3>
+                <p>Formulation et évaluation de politiques publiques, plans stratégiques, SDAC, PDC, SDAU et documents d'orientation.</p>
+            </article>
+
+            <!-- Carte 2 : Statistiques sociales -->
+            <article class="carte-expertise">
+                <div class="icone-expertise" aria-hidden="true">
+                <i class="fa-solid fa-chart-column"></i>
+                </div>
+                <h3>Statistiques sociales</h3>
+                <p>Collecte, analyse et production de rapports statistiques rigoureux au service de la décision publique et privée.</p>
+            </article>
+
+            <!-- Carte 3 : Suivi & Évaluation -->
+            <article class="carte-expertise">
+                <div class="icone-expertise" aria-hidden="true">
+                <i class="fa-solid fa-magnifying-glass-chart"></i>
+                </div>
+                <h3>Suivi &amp; Évaluation</h3>
+                <p>Dispositifs de suivi-évaluation, théorie du changement, cadres de résultats et évaluation d'impact.</p>
+            </article>
+
+            <!-- Carte 4 : Systèmes d'information -->
+            <article class="carte-expertise">
+                <div class="icone-expertise" aria-hidden="true">
+                <i class="fa-solid fa-database"></i>
+                </div>
+                <h3>Systèmes d'information</h3>
+                <p>Conception de bases de données, dématérialisation des processus et solutions numériques adaptées.</p>
+            </article>
+
+            <!-- Carte 5 : Études pluridisciplinaires -->
+            <article class="carte-expertise">
+                <div class="icone-expertise" aria-hidden="true">
+                <i class="fa-solid fa-briefcase"></i>
+                </div>
+                <h3>Études pluridisciplinaires</h3>
+                <p>Plans d'affaires, études de marché, études socio-économiques et faisabilité de projets.</p>
+            </article>
+
+            <!-- Carte 6 : Environnement & BTP -->
+            <article class="carte-expertise">
+                <div class="icone-expertise" aria-hidden="true">
+                <i class="fa-solid fa-leaf"></i>
+                </div>
+                <h3>Environnement &amp; BTP</h3>
+                <p>EIES, PGES, PAR, audits environnementaux, eau, hygiène, assainissement, changement climatique et BTP.</p>
+            </article>
+            </div>
+        </div>
+        </section>
+
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="pied-page" role="contentinfo">
+        <!-- Le footer sera ajouté plus tard -->
+    </footer>
+
 </body>
 </html>
