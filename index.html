@@ -27,7 +27,7 @@
     <meta name="twitter:description" content="Cabinet d'études spécialisé en politiques de développement, suivi-évaluation et statistiques sociales au Bénin." />
 
     <!--Favicon (SVG inline)-->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230033A0'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' fill='white' font-family='Arial' font-size='28' font-weight='bold'%3ELK%3C/text%3E%3C/svg%3E" />
+    <link rel="icon" type="image/png" href="img/LK2.png">
 
     <!--Polices & icônes-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -424,6 +424,147 @@
                 <p class="realisation-client"><i class="fa-solid fa-building-columns" aria-hidden="true"></i> CEPEPE</p>
                 </div>
             </article>
+            </div>
+        </div>
+        </section>
+
+        <!-- ============================================
+            SECTION CONTACT
+            ============================================ -->
+        <section class="section" id="contact" aria-labelledby="titre-contact">
+        <div class="conteneur">
+            <div class="entete-section">
+            <span class="surtitre">Contact</span>
+            <h2 id="titre-contact">Parlons de votre prochain projet.</h2>
+            <p>Notre équipe vous répond sous 48 heures ouvrées.</p>
+            </div>
+
+            <div class="grille-contact">
+            <!-- Colonne gauche : Coordonnées -->
+            <div class="contact-info">
+                <h3>Prenons contact.</h3>
+                <p>
+                Que ce soit pour une étude, une évaluation ou un accompagnement stratégique,
+                nous sommes à votre écoute.
+                </p>
+
+                <ul class="liste-contact">
+                <li>
+                    <div class="contact-icone" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></div>
+                    <div>
+                    <div class="contact-libelle">Adresse</div>
+                    <address class="contact-valeur">
+                        Ilot C/SB, MS AMADOUDJA E Abomey<br />
+                        03 BP 943 Cotonou, Bénin
+                    </address>
+                    </div>
+                </li>
+                <li>
+                    <div class="contact-icone" aria-hidden="true"><i class="fa-solid fa-envelope"></i></div>
+                    <div>
+                    <div class="contact-libelle">Email</div>
+                    <div class="contact-valeur">
+                        <a href="mailto:lkconsultbenin@yahoo.fr">lkconsultbenin@yahoo.fr</a>
+                    </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contact-icone" aria-hidden="true"><i class="fa-solid fa-phone"></i></div>
+                    <div>
+                    <div class="contact-libelle">Téléphone</div>
+                    <div class="contact-valeur">+229 97 00 00 00</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contact-icone" aria-hidden="true"><i class="fa-solid fa-building"></i></div>
+                    <div>
+                    <div class="contact-libelle">Annexe</div>
+                    <div class="contact-valeur">Abomey-Calavi, M/Son OHOUNWANOU</div>
+                    </div>
+                </li>
+                </ul>
+
+                <!-- Réseaux sociaux (optionnel) -->
+                <div class="contact-reseaux">
+                <span class="reseaux-libelle">Suivez‑nous</span>
+                <div class="reseaux-icones">
+                    <a href="#" aria-label="LinkedIn" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Facebook" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="WhatsApp" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+                </div>
+            </div>
+
+            <!-- Colonne droite : Formulaire -->
+            <div>
+                <form class="formulaire-contact" id="formulaire-contact" novalidate aria-label="Formulaire de contact">
+                <!-- Nom & Email en grille -->
+                <div class="grille-champs">
+                    <div class="champ">
+                    <label for="champ-nom">Nom complet <span class="obligatoire">*</span></label>
+                    <input
+                        type="text"
+                        id="champ-nom"
+                        name="nom"
+                        placeholder="Votre nom"
+                        autocomplete="name"
+                        required
+                        aria-required="true"
+                    />
+                    <span class="erreur-message" id="erreur-nom"></span>
+                    </div>
+                    <div class="champ">
+                    <label for="champ-email">Email <span class="obligatoire">*</span></label>
+                    <input
+                        type="email"
+                        id="champ-email"
+                        name="email"
+                        placeholder="vous@exemple.com"
+                        autocomplete="email"
+                        required
+                        aria-required="true"
+                    />
+                    <span class="erreur-message" id="erreur-email"></span>
+                    </div>
+                </div>
+
+                <!-- Sujet -->
+                <div class="champ">
+                    <label for="champ-sujet">Sujet</label>
+                    <input
+                    type="text"
+                    id="champ-sujet"
+                    name="sujet"
+                    placeholder="Objet de votre demande"
+                    />
+                </div>
+
+                <!-- Message -->
+                <div class="champ">
+                    <label for="champ-message">Message <span class="obligatoire">*</span></label>
+                    <textarea
+                    id="champ-message"
+                    name="message"
+                    placeholder="Décrivez votre besoin..."
+                    required
+                    aria-required="true"
+                    ></textarea>
+                    <span class="erreur-message" id="erreur-message"></span>
+                </div>
+
+                <!-- Bouton d'envoi -->
+                <button type="submit" class="btn-cnt">
+                    Envoyer le message <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                </button>
+
+                <!-- Message de succès (caché initialement) -->
+                <div class="message-succes" id="message-succes" role="status" aria-live="polite">
+                    <div class="icone-succes" aria-hidden="true"><i class="fa-solid fa-check"></i></div>
+                    <h3>Message envoyé avec succès !</h3>
+                    <p>Merci pour votre confiance. L'équipe LK CONSULT vous recontactera dans les meilleurs délais.</p>
+                </div>
+                </form>
+            </div>
             </div>
         </div>
         </section>

@@ -123,3 +123,106 @@ document.addEventListener('DOMContentLoaded', function() {
 
   cartes.forEach((carte) => observateur.observe(carte));
 });
+
+/* ============================================
+   SECTION CONTACT — Validation & envoi du formulaire
+   ============================================ */
+(function () {
+  // Fonctionne que le script soit chargé dans le <head> ou en fin de <body>
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialiserFormulaireContact);
+  } else {
+    initialiserFormulaireContact();
+  }
+
+  function initialiserFormulaireContact() {
+    const formulaire = document.getElementById('formulaire-contact');
+    if (!formulaire) {
+      console.warn('[contact.js] Formulaire #formulaire-contact introuvable dans la page.');
+      return;
+    }
+
+    const messageSucces = document.getElementById('message-succes');
+    const boutonEnvoi = formulaire.querySelector('button[type="submit"]');
+    const libelleBoutonOriginal = boutonEnvoi.innerHTML;
+
+    const regles = {
+      nom: {
+        valider: (valeur) => valeur.trim().length >= 2,
+        message: 'Veuillez indiquer votre nom complet.',
+      },
+      email: {
+        valider: (valeur) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valeur.trim()),
+        message: 'Veuillez indiquer une adresse email valide.',
+      },
+      message: {
+        valider: (valeur) => valeur.trim().length >= 10,
+        message: 'Votre message doit contenir au moins 10 caractères.',
+      },
+    };
+
+    function afficherErreur(champInput, texte) {
+      const champ = champInput.closest('.champ');
+      const erreur = champ.querySelector('.erreur-message');
+      champ.classList.add('invalide');
+      if (erreur) erreur.textContent = texte;
+    }
+
+    function effacerErreur(champInput) {
+      const champ = champInput.closest('.champ');
+      const erreur = champ.querySelector('.erreur-message');
+      champ.classList.remove('invalide');
+      if (erreur) erreur.textContent = '';
+    }
+
+    function validerChamp(nomChamp) {
+      const input = formulaire.elements[nomChamp];
+      const regle = regles[nomChamp];
+      if (!input || !regle) return true;
+
+      if (!regle.valider(input.value)) {
+        afficherErreur(input, regle.message);
+        return false;
+      }
+      effacerErreur(input);
+      return true;
+    }
+
+    Object.keys(regles).forEach((nomChamp) => {
+      const input = formulaire.elements[nomChamp];
+      if (!input) return;
+      input.addEventListener('blur', () => validerChamp(nomChamp));
+      input.addEventListener('input', () => {
+        if (input.closest('.champ').classList.contains('invalide')) {
+          validerChamp(nomChamp);
+        }
+      });
+    });
+
+    formulaire.addEventListener('submit', function (evenement) {
+      evenement.preventDefault();
+
+      const champsValides = Object.keys(regles)
+        .map(validerChamp)
+        .every(Boolean);
+
+      if (!champsValides) {
+        const premierInvalide = formulaire.querySelector('.champ.invalide input, .champ.invalide textarea');
+        if (premierInvalide) premierInvalide.focus();
+        return;
+      }
+
+      boutonEnvoi.disabled = true;
+      boutonEnvoi.innerHTML = '<i class="fa-solid fa-spinner" aria-hidden="true"></i> Envoi en cours...';
+
+      setTimeout(() => {
+        formulaire.classList.add('envoye');
+        messageSucces.classList.add('actif');
+        messageSucces.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        boutonEnvoi.disabled = false;
+        boutonEnvoi.innerHTML = libelleBoutonOriginal;
+      }, 900);
+    });
+  }
+})();

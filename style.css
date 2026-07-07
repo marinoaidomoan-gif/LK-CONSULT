@@ -647,6 +647,386 @@ h3 { font-size: 1.35rem; }
   color: var(--couleur-accent);
 }
 
+/* ============================================
+   SECTION CONTACT
+   ============================================ */
+#contact {
+  background: var(--gris-50);
+  position: relative;
+  overflow: hidden;
+}
+ 
+/* Forme décorative en arrière-plan, dans l'esprit du hero / apropos-visuel */
+#contact::before {
+  content: "";
+  position: absolute;
+  top: -180px;
+  right: -180px;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(0, 51, 160, 0.06), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+ 
+.grille-contact {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 48px;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+ 
+/* ============================================
+   COLONNE GAUCHE — Coordonnées
+   ============================================ */
+.contact-info {
+  background: linear-gradient(160deg, var(--couleur-primaire), var(--noir));
+  border-radius: var(--rayon-lg);
+  padding: 44px 38px;
+  color: var(--blanc);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+ 
+/* Cercle décoratif, cohérent avec .apropos-visuel::before */
+.contact-info::before {
+  content: "";
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  width: 220px;
+  height: 220px;
+  background: var(--couleur-accent);
+  border-radius: 50%;
+  opacity: 0.15;
+}
+ 
+.contact-info h3 {
+  font-family: var(--police-titre);
+  color: var(--blanc);
+  font-size: 1.5rem;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+}
+ 
+.contact-info > p {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  margin-bottom: 36px;
+  position: relative;
+  z-index: 1;
+}
+ 
+.liste-contact {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+ 
+.liste-contact li {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+ 
+.contact-icone {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--rayon-md);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--couleur-accent-clair);
+  transition: background var(--transition), transform var(--transition);
+}
+ 
+.liste-contact li:hover .contact-icone {
+  background: var(--couleur-accent);
+  color: var(--blanc);
+  transform: translateY(-3px);
+}
+ 
+.contact-libelle {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 3px;
+}
+ 
+.contact-valeur {
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--blanc);
+  font-style: normal;
+  line-height: 1.5;
+}
+ 
+.contact-valeur a {
+  transition: color var(--transition);
+}
+ 
+.contact-valeur a:hover {
+  color: var(--couleur-accent-clair);
+}
+ 
+/* Réseaux sociaux */
+.contact-reseaux {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  position: relative;
+  z-index: 1;
+}
+ 
+.reseaux-libelle {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 14px;
+}
+ 
+.reseaux-icones {
+  display: flex;
+  gap: 12px;
+}
+ 
+.reseaux-icones a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  color: var(--blanc);
+  transition: all var(--transition);
+}
+ 
+.reseaux-icones a:hover {
+  background: var(--couleur-accent);
+  border-color: var(--couleur-accent);
+  transform: translateY(-3px);
+}
+ 
+/* ============================================
+   COLONNE DROITE — Formulaire
+   ============================================ */
+.formulaire-contact {
+  background: var(--blanc);
+  border: 1px solid var(--gris-200);
+  border-radius: var(--rayon-lg);
+  padding: 44px 40px;
+  box-shadow: var(--ombre-douce);
+  position: relative;
+}
+ 
+.grille-champs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+ 
+.champ {
+  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+}
+ 
+.grille-champs .champ {
+  margin-bottom: 0;
+}
+ 
+.champ label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gris-800);
+  margin-bottom: 8px;
+}
+ 
+.champ .obligatoire {
+  color: var(--couleur-accent);
+}
+ 
+.champ input,
+.champ textarea {
+  font-family: var(--police-corps);
+  font-size: 0.95rem;
+  color: var(--noir);
+  background: var(--gris-50);
+  border: 1.5px solid var(--gris-200);
+  border-radius: var(--rayon-md);
+  padding: 13px 16px;
+  transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+}
+ 
+.champ textarea {
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.6;
+}
+ 
+.champ input::placeholder,
+.champ textarea::placeholder {
+  color: var(--gris-400);
+}
+ 
+.champ input:hover,
+.champ textarea:hover {
+  border-color: var(--gris-300);
+}
+ 
+.champ input:focus,
+.champ textarea:focus {
+  outline: none;
+  border-color: var(--couleur-primaire);
+  background: var(--blanc);
+  box-shadow: 0 0 0 4px rgba(0, 51, 160, 0.08);
+}
+ 
+/* États d'erreur */
+.champ.invalide input,
+.champ.invalide textarea {
+  border-color: #d92d20;
+  background: #fef3f2;
+}
+ 
+.champ.invalide input:focus,
+.champ.invalide textarea:focus {
+  box-shadow: 0 0 0 4px rgba(217, 45, 32, 0.08);
+}
+ 
+.erreur-message {
+  min-height: 18px;
+  font-size: 0.8rem;
+  color: #d92d20;
+  margin-top: 6px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity var(--transition), transform var(--transition);
+}
+ 
+.champ.invalide .erreur-message {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   BOUTON DU FORMULAIRE (btn-cnt)
+   ============================================ */
+.btn-cnt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  font-family: var(--police-corps);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: var(--rayon-md);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition);
+  background: var(--couleur-primaire);
+  color: var(--blanc);
+  box-shadow: 0 4px 14px rgba(0, 51, 160, 0.25);
+  margin-top: 6px;
+}
+
+.btn-cnt:hover {
+  background: var(--couleur-primaire-clair);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 51, 160, 0.32);
+}
+
+.btn-cnt:focus-visible {
+  outline: 3px solid var(--couleur-accent);
+  outline-offset: 2px;
+}
+
+.btn-cnt:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-cnt .fa-spinner {
+  animation: rotation-spinner 0.8s linear infinite;
+}
+
+@keyframes rotation-spinner {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+ 
+/* Message de succès */
+.message-succes {
+  display: none;
+  text-align: center;
+  padding: 50px 20px 10px;
+}
+ 
+.message-succes.actif {
+  display: block;
+  animation: contact-apparition 0.5s ease;
+}
+ 
+.formulaire-contact.envoye .grille-champs,
+.formulaire-contact.envoye .champ:not(.grille-champs .champ),
+.formulaire-contact.envoye > .btn-cnt {
+  display: none;
+}
+ 
+@keyframes contact-apparition {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+ 
+.icone-succes {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #ecfdf3;
+  color: #16a34a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin: 0 auto 20px;
+}
+ 
+.message-succes h3 {
+  font-family: var(--police-titre);
+  color: var(--noir);
+  margin-bottom: 10px;
+}
+ 
+.message-succes p {
+  color: var(--gris-600);
+  font-size: 0.95rem;
+  max-width: 380px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 900px) {
   .hero-grille {
@@ -679,6 +1059,20 @@ h3 { font-size: 1.35rem; }
   .liste-infos {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  /* Contact */
+  .grille-contact {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+ 
+  .contact-info {
+    padding: 36px 30px;
+  }
+ 
+  .formulaire-contact {
+    padding: 34px 28px;
   }
 }
 
@@ -740,6 +1134,26 @@ h3 { font-size: 1.35rem; }
   .grille-realisations { grid-template-columns: 1fr; gap: 24px; }
   .realisation-corps { padding: 20px; }
   .realisation-titre { font-size: 1rem; }
+}
+
+/* Contact */
+@media (max-width: 560px) {
+  .grille-champs {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+ 
+  .contact-info {
+    padding: 30px 24px;
+  }
+ 
+  .formulaire-contact {
+    padding: 28px 20px;
+  }
+ 
+  .liste-contact li {
+    gap: 12px;
+  }
 }
 
 @media (max-width: 480px) {
