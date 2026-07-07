@@ -552,6 +552,101 @@ h3 { font-size: 1.35rem; }
   font-size: 0.95rem;
 }
 
+/* ============================================
+   RÉALISATIONS (fond gris-200, animation au scroll)
+   ============================================ */
+.section-sombre {
+  background: var(--gris-200);
+  padding: 100px 0;
+  overflow: hidden;
+}
+
+.section-sombre .entete-section h2 {
+  color: var(--noir);
+}
+.section-sombre .entete-section p {
+  color: var(--gris-600);
+}
+.section-sombre .surtitre {
+  color: var(--couleur-accent) !important;
+}
+
+.grille-realisations {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+/* Carte : état initial (cachée) */
+.carte-realisation {
+  background: var(--blanc);
+  border-radius: var(--rayon-lg);
+  overflow: hidden;
+  border: 1px solid var(--gris-300);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.4s ease, border-color 0.3s ease;
+}
+
+/* État visible (ajouté par JavaScript) */
+.carte-realisation.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Effet de survol */
+.carte-realisation:hover {
+  transform: translateY(-8px);
+  border-color: var(--couleur-accent);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.10);
+}
+
+.realisation-image {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  background: var(--gris-100);
+}
+.realisation-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.carte-realisation:hover .realisation-image img {
+  transform: scale(1.06);
+}
+
+.realisation-corps {
+  padding: 26px;
+}
+.realisation-annee {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--couleur-accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.realisation-titre {
+  color: var(--noir);
+  font-family: var(--police-titre);
+  font-size: 1.1rem;
+  line-height: 1.35;
+  margin-bottom: 14px;
+}
+.realisation-client {
+  font-size: 0.85rem;
+  color: var(--gris-600);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.realisation-client i {
+  color: var(--couleur-accent);
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 900px) {
   .hero-grille {
@@ -640,6 +735,11 @@ h3 { font-size: 1.35rem; }
   .entete-section p {
     font-size: 0.95rem;
   }
+  /* Realisation */
+  .section-sombre { padding: 70px 0; }
+  .grille-realisations { grid-template-columns: 1fr; gap: 24px; }
+  .realisation-corps { padding: 20px; }
+  .realisation-titre { font-size: 1rem; }
 }
 
 @media (max-width: 480px) {
@@ -696,4 +796,9 @@ h3 { font-size: 1.35rem; }
   .info-valeur {
     font-size: 0.9rem;
   }
+
+  /* Realisation */
+  .section-sombre { padding: 50px 0; }
+  .realisation-image { aspect-ratio: 16/9; }
+  .realisation-corps { padding: 16px; }
 }

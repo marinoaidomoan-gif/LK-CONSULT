@@ -97,3 +97,29 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+// ============================================
+// ANIMATION RÉALISATIONS (au scroll)
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+  const cartes = document.querySelectorAll('.carte-realisation');
+  if (!cartes.length) return;
+
+  const observateur = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const index = Array.from(cartes).indexOf(entry.target);
+        // Délai progressif pour effet cascade (150ms entre chaque)
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, index * 50);
+        observateur.unobserve(entry.target); // Une seule fois
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -30px 0px'
+  });
+
+  cartes.forEach((carte) => observateur.observe(carte));
+});
