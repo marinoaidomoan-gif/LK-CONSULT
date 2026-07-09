@@ -56,46 +56,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ============================================
-// COMPTEUR STATISTIQUES (HERO)
+// COMPTEUR STATISTIQUES (HERO) — DÉCLENCHEMENT AU SCROLL
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
-  // Sélectionner tous les éléments contenant les nombres
-  const compteurs = document.querySelectorAll('.stat-nombre');
 
-  // Si aucun compteur trouvé, on arrête
-  if (!compteurs.length) return;
+    // 1. Sélectionner la zone qui contient les stats et les compteurs
+    const heroStats = document.querySelector('.hero-stats');
+    if (!heroStats) return; // Sécurité : si la zone n'existe pas, on arrête
 
-  // Fonction pour animer un compteur
-  function animerCompteur(element, cible, suffixe, duree) {
-    let depart = 0;
-    const pas = Math.max(1, Math.floor(cible / 60)); // 60 étapes pour ~1.5s
-    const interval = Math.floor(duree / 60);
-    let etape = 0;
+    const compteurs = heroStats.querySelectorAll('.stat-nombre');
 
-    const timer = setInterval(() => {
-      etape += pas;
-      if (etape >= cible) {
-        etape = cible;
-        clearInterval(timer);
-      }
-      // Mettre à jour l'affichage avec le suffixe (ex: "+")
-      element.textContent = etape + suffixe;
-    }, interval);
-  }
+    // 2. Vérifier qu'il y a bien des compteurs à animer
+    if (!compteurs.length) return;
 
-  // Démarrer les compteurs
-  compteurs.forEach((element) => {
-    const texteComplet = element.textContent.trim(); // ex: "14+"
-    const cible = parseInt(texteComplet, 10); // ex: 14
-    const suffixe = texteComplet.replace(cible.toString(), ''); // ex: "+"
+    // 3. Fonction qui anime UN compteur (ex: 0 → 14+)
+    function animerCompteur(element, cible, suffixe, duree = 1500) {
+        let depart = 0;
+        const pas = Math.max(1, Math.floor(cible / 60));
+        const interval = Math.floor(duree / 60);
+        let etape = 0;
 
-    // Si la cible est valide, on lance l'animation
-    if (!isNaN(cible) && cible > 0) {
-      // On met d'abord à 0 pour que le départ soit propre
-      element.textContent = '0' + suffixe;
-      animerCompteur(element, cible, suffixe, 10000); // 1.5 secondes
+        const timer = setInterval(() => {
+            etape += pas;
+            if (etape >= cible) {
+                etape = cible;
+                clearInterval(timer);
+            }
+            element.textContent = etape + suffixe;
+        }, interval);
     }
-  });
+
+    // 4. Fonction qui initialise les compteurs (mise à 0 + sauvegarde des valeurs)
+    function initialiserEtLancerCompteurs() {
+        // On parcourt chaque compteur
+        compteurs.forEach((element) => {
+            const texteComplet = element.textContent.trim(); // ex: "14+"
+            const cible = parseInt(texteComplet, 10);        // ex: 14
+            const suffixe = texteComplet.replace(cible.toString(), ''); // ex: "+"
+
+            if (!isNaN(cible) && cible > 0) {
+                // On met le compteur à 0 pour que l'animation parte de zéro
+                element.textContent = '0' + suffixe;
+                // On lance l'animation pour ce compteur avec 1500ms de durée
+                animerCompteur(element, cible, suffixe, 1500);
+            }
+        });
+    }
+
+    // 5. Création de l'observateur qui scrute l'arrivée des statistiques
+    const observateurStats = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // La zone des stats est visible : on lance TOUS les compteurs
+                initialiserEtLancerCompteurs();
+                // Une fois lancé, on arrête d'observer pour ne pas rejouer l'animation
+                observateurStats.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.5 // Se déclenche quand 50% de la zone des stats est visible
+        // (on pourrait mettre 0.3 pour que ce soit plus réactif)
+    });
+
+    // 6. Démarrer la surveillance de la zone .hero-stats
+    observateurStats.observe(heroStats);
 });
 
 // ============================================

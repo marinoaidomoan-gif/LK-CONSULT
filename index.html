@@ -26,7 +26,7 @@
     <meta name="twitter:title" content="LK CONSULT — Cabinet d'études & Conseil" />
     <meta name="twitter:description" content="Cabinet d'études spécialisé en politiques de développement, suivi-évaluation et statistiques sociales au Bénin." />
 
-    <!--Favicon (SVG inline)-->
+    <!--Icon site-->
     <link rel="icon" type="image/png" href="img/LK2.png">
 
     <!--Polices & icônes-->
@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js">
+    <script src="script.js" defer>
 
     </script>
 
@@ -268,11 +268,25 @@
         <div class="conteneur grille-apropos">
             <!-- Colonne gauche : citation du DG avec fond -->
             <aside class="apropos-visuel" aria-label="Citation du directeur général">
-            <i class="fa-solid fa-quote-left citation-icone" aria-hidden="true"></i>
-            <blockquote>
-                Transformer la donnée en décision et la stratégie en résultats concrets pour le développement.
-            </blockquote>
-            <cite>— KOUHOUNDE S. Evrard Landry, Directeur Général</cite>
+                <!-- Photo du DG (en arrière-plan) -->
+                <img 
+                    src="img/dg-photo.png" 
+                    alt="KOUHOUNDE S. Evrard Landry, Directeur Général de LK CONSULT" 
+                    class="dg-photo" 
+                    loading="lazy"
+                />
+
+                <!-- Cercle décoratif orange (conservé) -->
+                <span class="cercle-decoratif" aria-hidden="true"></span>
+
+                <!-- Contenu texte (au-dessus de la photo et du dégradé) -->
+                <div class="contenu-citation">
+                    <i class="fa-solid fa-quote-left citation-icone" aria-hidden="true"></i>
+                    <blockquote>
+                        Transformer la donnée en décision et la stratégie en résultats concrets pour le développement.
+                    </blockquote>
+                    <cite>— KOUHOUNDE S. Evrard Landry, Directeur Général</cite>
+                </div>
             </aside>
 
             <!-- Colonne droite : informations du cabinet -->
@@ -311,20 +325,6 @@
                 <div>
                     <span class="info-libelle">Expérience</span>
                     <span class="info-valeur">14 ans</span>
-                </div>
-                </li>
-                <li>
-                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                <div>
-                    <span class="info-libelle">Direction Générale</span>
-                    <span class="info-valeur">Ilot C/SB, MS AMADOUDJA  E Abomey, 03 bp 943 Cotonou</span>
-                </div>
-                </li>
-                <li>
-                <i class="fa-solid fa-building" aria-hidden="true"></i>
-                <div>
-                    <span class="info-libelle">Annexe</span>
-                    <span class="info-valeur">Abomey-Calavi, M/Son OHOUNWANOU</span>
                 </div>
                 </li>
                 <li>
@@ -576,14 +576,18 @@
         <div class="conteneur">
             <!-- Grille principale (4 colonnes) -->
             <div class="grille-pied">
-            <!-- Colonne 1 : Logo + description -->
+            <!-- Dans le footer, colonne 1 -->
             <div class="pied-colonne">
-                <a href="#accueil" class="logo" aria-label="LK CONSULT - Retour à l'accueil">
-                <span class="logo-marque" aria-hidden="true">LK</span>
-                <span>LK <span class="logo-texte-accent">CONSULT</span></span>
+                <a href="#accueil" class="logo logo-footer" aria-label="LK CONSULT - Retour à l'accueil">
+                    <img 
+                        src="img/LK2.png" 
+                        alt="LK CONSULT - Cabinet d'études et conseil" 
+                        class="logo-image-footer" 
+                        loading="lazy"
+                    />
                 </a>
                 <p style="max-width: 340px; font-size: 0.9rem; margin-top: 12px; color: var(--gris-400);">
-                Cabinet d'études spécialisé en formulation et évaluation de politiques de développement - République du Bénin.
+                    Cabinet d'études spécialisé en formulation et évaluation de politiques de développement - République du Bénin.
                 </p>
             </div>
 

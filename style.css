@@ -111,8 +111,10 @@ h3 { font-size: 1.35rem; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 0;
+  padding: 0 24px;
   height: 85px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -124,10 +126,9 @@ h3 { font-size: 1.35rem; }
 
 .logo-image {
   height: 75px;
-  width: auto;
-  max-width: 200px;
-  display: block;
-  margin-left: 1rem;
+    width: auto;
+    max-width: 200px;
+    display: block;
 }
 
 /* ===== Menu ===== */
@@ -176,24 +177,6 @@ h3 { font-size: 1.35rem; }
   cursor: pointer;
   color: var(--noir);
   padding: 4px;
-  margin-right: 1.5rem;
-}
-
-.bouton-menu-mobile:focus-visible {
-  outline: 3px solid var(--couleur-accent);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-
-/* ===== Bouton hamburger (mobile) ===== */
-.bouton-menu-mobile {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--noir);
-  padding: 4px;
 }
 
 .bouton-menu-mobile:focus-visible {
@@ -207,7 +190,7 @@ h3 { font-size: 1.35rem; }
    ============================================ */
 .hero {
   position: relative;
-  padding: 40px 0 120px;
+  padding: 80px 0 120px;
   background: linear-gradient(180deg, var(--gris-50) 0%, var(--blanc) 100%);
   overflow: hidden;
 }
@@ -258,7 +241,7 @@ h3 { font-size: 1.35rem; }
   color: var(--gris-600);
   max-width: 540px;
   line-height: 1.7;
-  text-align: justify;
+  text-align: left;
 }
 
 .hero-actions {
@@ -310,10 +293,6 @@ h3 { font-size: 1.35rem; }
    ============================================ */
 .section {
   padding: 100px 0;
-}
-
-.section-alt {
-  background: var(--gris-50);
 }
 
 .entete-section {
@@ -439,7 +418,7 @@ h3 { font-size: 1.35rem; }
    À PROPOS
    ============================================ */
 .section-alt {
-  background: var(--gris-50);
+  background: var(--blanc);
 }
 
 .grille-apropos {
@@ -451,55 +430,93 @@ h3 { font-size: 1.35rem; }
 
 /* ===== Colonne gauche : citation ===== */
 .apropos-visuel {
-  position: relative;
-  aspect-ratio: 4/5;
-  border-radius: var(--rayon-lg);
-  background: linear-gradient(135deg, var(--couleur-primaire), var(--noir));
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  color: var(--blanc);
-  overflow: hidden;
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: var(--rayon-lg);
+    overflow: hidden;
+    /* Fallback si la photo ne charge pas */
+    background: linear-gradient(135deg, var(--couleur-primaire), var(--noir));
+    
+    /* Flex pour centrer le contenu texte */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 40px;
+    isolation: isolate; /* Crée un nouveau contexte d'empilement */
 }
 
-/* Cercle décoratif en arrière-plan */
-.apropos-visuel::before {
-  content: "";
-  position: absolute;
-  top: -80px;
-  right: -80px;
-  width: 260px;
-  height: 260px;
-  background: var(--couleur-accent);
-  border-radius: 50%;
-  opacity: 0.15;
+/* --- 1. La photo du DG --- */
+.dg-photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Remplit le cadre sans déformer */
+    z-index: 0;
 }
 
-.apropos-visuel .citation-icone {
-  font-size: 3rem;
-  color: var(--couleur-accent);
-  margin-bottom: 16px;
-  position: relative;
-  z-index: 1;
+.cercle-decoratif {
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 260px;
+    height: 260px;
+    background: var(--couleur-accent);
+    border-radius: 50%;
+    opacity: 0.25;
+    z-index: 1; /* Au-dessus de la photo */
+    pointer-events: none;
 }
 
-.apropos-visuel blockquote {
-  font-family: var(--police-titre);
-  font-size: 1.25rem;
-  font-style: italic;
-  line-height: 1.5;
-  margin-bottom: 20px;
-  position: relative;
-  z-index: 1;
+.apropos-visuel::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%; /* Le dégradé couvre 50% de la hauteur en partant du bas */
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.85) 0%,      /* Très sombre en bas pour la citation */
+        rgba(0, 51, 160, 0.55) 50%,  /* Bleu primaire qui s'intensifie */
+        transparent 100%             /* Complètement transparent en haut pour voir le visage */
+    );
+    z-index: 2;
+    pointer-events: none;
 }
 
-.apropos-visuel cite {
-  font-style: normal;
-  font-size: 0.9rem;
-  opacity: 0.8;
-  position: relative;
-  z-index: 1;
+/* --- 4. Contenu texte (citation) --- */
+.contenu-citation {
+    position: relative;
+    z-index: 3; /* Au-dessus de tout */
+    color: var(--blanc);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6); /* Ombre portée pour renforcer la lisibilité */
+    display: flex;
+    flex-direction: column;
+}
+
+.citation-icone {
+    font-size: 2.8rem;
+    color: var(--couleur-accent);
+    margin-bottom: 12px;
+    opacity: 0.9;
+}
+
+.contenu-citation blockquote {
+    font-family: var(--police-titre);
+    font-size: 1.3rem;
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    color: var(--blanc);
+}
+
+.contenu-citation cite {
+    font-style: normal;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    color: rgba(255, 255, 255, 0.85);
 }
 
 /* ===== Colonne droite : informations ===== */
@@ -553,10 +570,10 @@ h3 { font-size: 1.35rem; }
 }
 
 /* ============================================
-   RÉALISATIONS (fond gris-200, animation au scroll)
+   RÉALISATIONS (fond gris-100, animation au scroll)
    ============================================ */
 .section-sombre {
-  background: var(--gris-200);
+  background: var(--gris-100);
   padding: 100px 0;
   overflow: hidden;
 }
@@ -611,7 +628,7 @@ h3 { font-size: 1.35rem; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s ease;
+  transition: transform 0.4s ease;
 }
 .carte-realisation:hover .realisation-image img {
   transform: scale(1.06);
@@ -689,6 +706,7 @@ h3 { font-size: 1.35rem; }
   position: relative;
   overflow: hidden;
   height: 100%;
+  word-wrap: break-word;
 }
  
 /* Cercle décoratif, cohérent avec .apropos-visuel::before */
@@ -735,6 +753,7 @@ h3 { font-size: 1.35rem; }
   display: flex;
   gap: 16px;
   align-items: flex-start;
+  width: 100%;
 }
  
 .contact-icone {
@@ -773,6 +792,7 @@ h3 { font-size: 1.35rem; }
   color: var(--blanc);
   font-style: normal;
   line-height: 1.5;
+  word-break: break-word;
 }
  
 .contact-valeur a {
@@ -836,12 +856,16 @@ h3 { font-size: 1.35rem; }
   padding: 44px 40px;
   box-shadow: var(--ombre-douce);
   position: relative;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
  
 .grille-champs {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 22px;
+  width: 100%;
 }
  
 .champ {
@@ -867,6 +891,8 @@ h3 { font-size: 1.35rem; }
  
 .champ input,
 .champ textarea {
+  width: 100%;
+  box-sizing: border-box;
   font-family: var(--police-corps);
   font-size: 0.95rem;
   color: var(--noir);
@@ -1125,8 +1151,119 @@ h3 { font-size: 1.35rem; }
   color: var(--gris-500);
 }
 
-/* ===== Responsive ===== */
+/* ============================================
+   LOGO DANS LE FOOTER
+   ============================================ */
+
+/* Dimensionnement du logo dans le footer */
+.logo-image-footer {
+    height: 55px;  /* Taille idéale pour un footer */
+    width: auto;
+    max-width: 200px;
+    display: block;
+    
+    /* === ASTUCE DESIGN : Ombre externe blanche très légère === 
+       Cela permet au bleu du logo de se détacher du fond bleu foncé */
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
+}
+
+/* Effet de survol : léger éclat */
+.logo-footer:hover .logo-image-footer {
+    filter: drop-shadow(0 0 12px rgba(255, 140, 0, 0.3));
+}
+
+/* ============================================
+   BOUTONS
+   ============================================ */
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--police-corps);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: var(--rayon-md);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+ 
+.bouton-primaire {
+  background: var(--couleur-primaire);
+  color: var(--blanc);
+  box-shadow: 0 4px 14px rgba(0, 51, 160, 0.25);
+}
+ 
+.bouton-primaire:hover {
+  background: var(--couleur-primaire-clair);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 51, 160, 0.32);
+}
+ 
+.bouton-secondaire {
+  background: var(--blanc);
+  color: var(--noir);
+  border-color: var(--gris-300);
+}
+ 
+.bouton-secondaire:hover {
+  border-color: var(--couleur-primaire);
+  color: var(--couleur-primaire);
+  transform: translateY(-2px);
+}
+ 
+.bouton-accent {
+  background: var(--couleur-accent);
+  color: var(--blanc);
+  box-shadow: 0 4px 14px rgba(255, 140, 0, 0.28);
+}
+ 
+.bouton-accent:hover {
+  background: var(--couleur-accent-clair);
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   ===== Responsive ===== 
+ ============================================ */
+
+ @media (max-width: 1024px) {
+  .menu-liste {
+    gap: 28px; /* Réduit l'espace entre les liens */
+  }
+  .menu-lien {
+    font-size: 0.9rem; /* Réduit très légèrement la police */
+  }
+
+  .grille-contact {
+    grid-template-columns: 1fr; /* Passe en 1 colonne sur tablette */
+    gap: 32px;
+  }
+    
+  .contact-info {
+    padding: 36px 30px;
+  }
+    
+  .formulaire-contact {
+    padding: 36px 30px;
+  }
+    
+  .grille-champs {
+    grid-template-columns: 1fr 1fr; /* Reste en 2 colonnes sur tablette */
+    gap: 18px;
+  }
+}
+
 @media (max-width: 900px) {
+  .menu-liste {
+    gap: 20px;
+  }
+  .menu-lien {
+    font-size: 0.85rem;
+  }
+
   .hero-grille {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -1180,6 +1317,52 @@ h3 { font-size: 1.35rem; }
   }
 }
 
+@media (max-width: 820px) {
+  .menu-liste {
+    gap: 14px;
+  }
+  .menu-lien {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* 1. La grille principale passe en colonne unique */
+  .grille-apropos {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  /* 2. La carte photo/citation : moins haute et mieux aérée */
+  .apropos-visuel {
+    aspect-ratio: 16/10; /* Passe d'un format portrait (4/5) à un format paysage plus large */
+    padding: 30px 28px;
+    min-height: 220px; /* Sécurité : ne pas descendre en dessous */
+  }
+
+  /* 3. Réduction de la taille de la citation */
+  .apropos-visuel blockquote {
+    font-size: 1.1rem; /* Légèrement plus petit */
+    line-height: 1.4;
+  }
+
+  .apropos-visuel .citation-icone {
+    font-size: 2.2rem; /* Icône guillemet plus petite */
+    margin-bottom: 8px;
+  }
+
+  .apropos-visuel cite {
+    font-size: 0.8rem;
+  }
+
+  /* 4. Titre de la colonne droite */
+  .apropos-contenu h2 {
+    font-size: 1.7rem;
+    margin-top: 8px !important;
+    margin-bottom: 16px !important;
+  }
+}
+
 @media (max-width: 720px) {
   .bouton-menu-mobile {
     display: block;
@@ -1192,7 +1375,7 @@ h3 { font-size: 1.35rem; }
     right: 0;
     background: var(--blanc);
     flex-direction: column;
-    padding: 20px 24px;
+    padding: 24px 24px;
     gap: 16px;
     border-bottom: 1px solid var(--gris-200);
     display: none;
@@ -1209,6 +1392,7 @@ h3 { font-size: 1.35rem; }
   }
 
   .logo-image {
+    margin-left: 0 !important;
     height: 45px;
     max-width: 150px;
   }
@@ -1238,6 +1422,41 @@ h3 { font-size: 1.35rem; }
   .grille-realisations { grid-template-columns: 1fr; gap: 24px; }
   .realisation-corps { padding: 20px; }
   .realisation-titre { font-size: 1rem; }
+
+  /* Contact */
+  .grille-contact {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+    
+  .contact-info {
+    padding: 28px 20px;
+  }
+    
+  .formulaire-contact {
+    padding: 24px 18px;
+  }
+    
+  .grille-champs {
+    grid-template-columns: 1fr; /* Passe en 1 colonne sur mobile */
+    gap: 0;
+  }
+    
+  .champ input,
+  .champ textarea {
+    font-size: 0.9rem;
+    padding: 11px 14px;
+  }
+    
+  .contact-valeur {
+    font-size: 0.85rem;
+  }
+    
+  .contact-icone {
+    width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+  }
 }
 
 /* Contact */
@@ -1329,4 +1548,31 @@ h3 { font-size: 1.35rem; }
   .section-sombre { padding: 50px 0; }
   .realisation-image { aspect-ratio: 16/9; }
   .realisation-corps { padding: 16px; }
+
+  /* Apropos */
+  /* 1. La photo/citation prend encore moins de place */
+  .apropos-visuel {
+    aspect-ratio: 16/9;
+    padding: 20px 18px;
+    min-height: 180px;
+  }
+
+  .apropos-visuel blockquote {
+    font-size: 0.95rem;
+  }
+
+  .apropos-visuel .citation-icone {
+    font-size: 1.8rem;
+  }
+
+  .apropos-visuel cite {
+    font-size: 0.7rem;
+  }
+
+  /* 3. Les paragraphes de texte sont mieux espacés */
+  .apropos-contenu p {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+
 }
