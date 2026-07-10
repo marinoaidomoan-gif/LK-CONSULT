@@ -1882,36 +1882,88 @@ section[id] {
 
 @media (max-width: 720px) {
   .bouton-menu-mobile {
-    display: block;
+    display: block !important;
+    position: relative;
+    z-index: 120; /* Reste bien au-dessus de l'écran blanc */
   }
 
-  .menu-liste {
+  .en-tete:not(.en-tete-scroll) .bouton-menu-mobile {
+    color: var(--blanc) !important;
+  }
+  .en-tete-scroll .bouton-menu-mobile {
+    color: var(--noir) !important;
+  }
+
+ .menu-liste  {
     position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--blanc);
-    flex-direction: column;
-    padding: 24px 24px;
-    gap: 16px;
-    border-bottom: 1px solid var(--gris-200);
-    display: none;
+    top: 90px; /* Aligné juste sous votre barre de navigation de 85px */
+    left: 5%;
+    right: 5%;
+    width: 90%; /* Ne prend pas tout l'écran, laisse des marges sur les côtés */
+    max-height: 80vh;
+    overflow-y: auto;
+    
+    /* Effet Glassmorphism (Translucide) */
+    background: rgba(255, 255, 255, 0.82) !important; 
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: var(--rayon-lg);
     box-shadow: var(--ombre-forte);
+    
+    /* Structure interne */
+    flex-direction: column;
+    padding: 30px 20px;
+    gap: 12px;
+    margin: 0;
+    z-index: 110;
+
+    /* Animation d'apparition moderne fluide */
+    display: flex !important; /* Requis pour la transition */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-15px);
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                visibility 0.3s ease;
   }
 
   .menu-liste.ouvert {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
-  .menu-lien {
-    font-size: 1.05rem;
-    padding: 8px 0;
+  /* 3. Style des liens internes */
+  .menu-liste .menu-lien {
+    color: var(--gris-900) !important; /* Texte sombre pour un excellent contraste */
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 12px;
+    width: 100%;
+    text-align: center;
+    border-radius: var(--rayon-md);
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+
+  /* Effet de survol/clic épuré sur les liens */
+  .menu-liste .menu-lien:hover {
+    background: rgba(0, 51, 160, 0.08); /* Léger fond bleu transparent au clic */
+    color: var(--couleur-primaire) !important;
+  }
+
+  /* Masquer définitivement l'ancienne bordure de soulignement sous les liens */
+  .menu-liste .menu-lien::after {
+    display: none !important;
   }
 
   .logo-image {
     margin-left: 0 !important;
     height: 45px;
     max-width: 150px;
+    position: relative;
+    z-index: 120; /* Reste visible au-dessus de l'overlay si nécessaire */
   }
 
   .section {
