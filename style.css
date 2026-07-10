@@ -339,6 +339,14 @@ h3 { font-size: 1.35rem; }
   letter-spacing: 0.05em;
 }
 
+.esperluettes {
+  font-family: 'Georgia', 'Playfair Display', serif;
+  font-weight: 700;
+  color: var(--blanc);
+  font-size: 1.1em;
+  letter-spacing: 0.05em;
+}
+
 /* ============================================
    EXPERTISES
    ============================================ */
@@ -357,9 +365,20 @@ h3 { font-size: 1.35rem; }
   padding: 36px 30px;
   border-radius: var(--rayon-lg);
   border: 1px solid var(--gris-200);
-  transition: all var(--transition);
   position: relative;
   overflow: hidden;
+ 
+  /* État initial : masqué, prêt pour l'animation d'entrée au scroll */
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease,
+    box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* État visible, ajouté par script.js au scroll */
+.carte-expertise.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Barre orange animée au survol */
@@ -412,6 +431,27 @@ h3 { font-size: 1.35rem; }
   color: var(--gris-600);
   font-size: 0.95rem;
   line-height: 1.6;
+}
+
+/* Icône : réagit désormais au survol (rotation + léger zoom) */
+.icone-expertise {
+  transition: transform 0.35s ease, background 0.3s ease;
+}
+ 
+.carte-expertise:hover .icone-expertise {
+  transform: rotate(-8deg) scale(1.08);
+}
+ 
+/* Accessibilité : désactive tout pour les personnes sensibles au mouvement */
+@media (prefers-reduced-motion: reduce) {
+  .carte-expertise {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .icone-expertise {
+    transition: none;
+  }
 }
 
 /* ============================================
@@ -1151,6 +1191,44 @@ h3 { font-size: 1.35rem; }
   color: var(--gris-500);
 }
 
+/* Bloc identité (nom + slogan) */
+.footer-identite {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 12px; /* Espace entre le slogan et la description */
+}
+
+/* Nom du cabinet */
+.footer-nom {
+  font-family: var(--police-titre);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--blanc);
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+/* Slogan métier */
+.footer-slogan {
+  font-family: var(--police-corps);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--couleur-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 2px;
+}
+
+/* Description du cabinet */
+.footer-description {
+  max-width: 340px;
+  font-size: 0.9rem;
+  margin-top: 0;
+  color: var(--gris-400);
+  line-height: 1.5;
+}
+
 /* ============================================
    LOGO DANS LE FOOTER
    ============================================ */
@@ -1165,6 +1243,7 @@ h3 { font-size: 1.35rem; }
     /* === ASTUCE DESIGN : Ombre externe blanche très légère === 
        Cela permet au bleu du logo de se détacher du fond bleu foncé */
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
+    margin-bottom: 8px;
 }
 
 /* Effet de survol : léger éclat */
@@ -1223,6 +1302,294 @@ h3 { font-size: 1.35rem; }
 .bouton-accent:hover {
   background: var(--couleur-accent-clair);
   transform: translateY(-2px);
+}
+
+/* ============================================
+   MISSION & VISION — Section plein cadre
+   ============================================ */
+.section-mission-vision {
+  position: relative;
+  padding: 140px 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Image de fond avec effet "Ken Burns" : zoom lent en boucle, plus
+   fiable multi-navigateurs qu'un background-attachment:fixed (bugué
+   sur Safari iOS). */
+.mv-fond {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: url('img/mv.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: mv-zoom-lent 24s ease-in-out infinite alternate;
+}
+
+@keyframes mv-zoom-lent {
+  from { transform: scale(1); }
+  to   { transform: scale(1.08); }
+}
+
+/* Dégradé de marque par-dessus l'image : garantit la lisibilité du
+   texte quelle que soit la photo utilisée, et rappelle le bleu/orange
+   de la charte. */
+.mv-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    160deg,
+    rgba(0, 51, 160, 0.92) 0%,
+    rgba(0, 0, 0, 0.78) 55%,
+    rgba(255, 140, 0, 0.55) 100%
+  );
+}
+
+.mv-contenu {
+  position: relative;
+  z-index: 1;
+}
+
+/* En-tête clair, adapté au fond sombre */
+.entete-section-claire .surtitre-clair {
+  color: #ffcb99;
+}
+.entete-section-claire .titre-clair {
+  color: var(--blanc);
+}
+.entete-section-claire .texte-clair {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Grille des deux panneaux */
+.grille-mv {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 20px;
+}
+
+/* Panneaux "verre dépoli" (glassmorphism) */
+.panneau-mv {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: var(--rayon-lg);
+  padding: 44px 38px;
+  transition: transform 0.35s ease, background var(--transition),
+    border-color var(--transition), box-shadow 0.35s ease;
+
+  /* État initial : masqué, prêt pour l'animation d'entrée au scroll */
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+.panneau-mv.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* Décalage progressif entre les deux panneaux (effet cascade) */
+.panneau-mv:nth-child(1).visible { transition-delay: 0s; }
+.panneau-mv:nth-child(2).visible { transition-delay: 0.15s; }
+
+.panneau-mv:hover {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.32);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+}
+
+.panneau-mv-icone {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--rayon-md);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: var(--blanc);
+  margin-bottom: 22px;
+  transition: transform 0.35s ease, background var(--transition);
+}
+
+.panneau-mv:hover .panneau-mv-icone {
+  transform: rotate(-8deg) scale(1.08);
+  background: var(--couleur-accent);
+}
+
+.panneau-mv h3 {
+  font-family: var(--police-titre);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--blanc);
+  margin-bottom: 14px;
+}
+
+.panneau-mv p {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+/* ============================================
+   RESPONSIVE MISSION&VISION
+   ============================================ */
+@media (max-width: 800px) {
+  .section-mission-vision {
+    padding: 90px 0;
+  }
+  .grille-mv {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .panneau-mv {
+    padding: 34px 26px;
+  }
+}
+
+/* Respect des préférences d'accessibilité : désactive les animations
+   pour les personnes ayant activé "mouvement réduit" sur leur appareil */
+@media (prefers-reduced-motion: reduce) {
+  .mv-fond {
+    animation: none;
+  }
+  .panneau-mv {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================
+   PARTENAIRES
+   ============================================ */
+.section-partenaires {
+  padding: 90px 0 100px;
+  background: var(--blanc);
+  overflow: hidden;
+}
+
+/* Bande bord à bord : placée hors de .conteneur dans le HTML, elle
+   hérite donc de la pleine largeur de la section (= pleine largeur
+   de la page), sans avoir besoin de hacks 100vw. */
+.defilement-partenaires {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 50px;
+
+  /* Fondu doux aux extrémités : les logos apparaissent/disparaissent
+     en fondu au lieu d'être coupés net */
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+}
+
+.piste-partenaires {
+  display: flex;
+  width: max-content;
+  animation: defilement-logos 28s linear infinite;
+}
+
+/* Pause au survol pour laisser le temps de regarder */
+.defilement-partenaires:hover .piste-partenaires {
+  animation-play-state: paused;
+}
+
+.groupe-logos {
+  display: flex;
+  align-items: center;
+  gap: 88px;
+  padding-right: 88px;
+}
+
+.logo-partenaire {
+  height: 64px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: grayscale(100%) opacity(0.55);
+  transition: filter var(--transition), transform var(--transition);
+}
+
+.logo-partenaire:hover {
+  filter: grayscale(0%) opacity(1);
+  transform: translateY(-2px);
+}
+
+/* Traitement pour les logos livrés avec un fond sombre plein (ex: ANPE) :
+   un léger cadre blanc arrondi évite le carré noir qui tranche dans la
+   bande blanche. */
+.logo-partenaire-fond-sombre {
+  background: var(--blanc);
+  border-radius: var(--rayon-md);
+  padding: 8px 14px;
+  filter: opacity(0.7);
+}
+
+.logo-partenaire-fond-sombre:hover {
+  filter: opacity(1);
+  transform: translateY(-2px);
+}
+
+/* La piste contient 2 groupes identiques bout à bout : translater de
+   -50% déplace exactement la largeur d'un groupe -> boucle invisible */
+@keyframes defilement-logos {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ============================================
+   RESPONSIVE PARTENAIRES
+   ============================================ */
+@media (max-width: 600px) {
+  .logo-partenaire {
+    height: 44px;
+  }
+  .groupe-logos {
+    gap: 56px;
+    padding-right: 56px;
+  }
+  .piste-partenaires {
+    animation-duration: 20s;
+  }
+}
+
+/* Accessibilité : arrête le défilement pour les personnes sensibles
+   au mouvement, affiche les logos en grille statique à la place */
+@media (prefers-reduced-motion: reduce) {
+  .defilement-partenaires {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .piste-partenaires {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+  .piste-partenaires .groupe-logos[aria-hidden="true"] {
+    display: none;
+  }
 }
 
 /* ============================================
@@ -1455,6 +1822,18 @@ h3 { font-size: 1.35rem; }
   .contact-icone {
     width: 36px;
     height: 36px;
+    font-size: 0.85rem;
+  }
+
+  .footer-nom {
+    font-size: 1rem;
+  }
+    
+  .footer-slogan {
+    font-size: 0.65rem;
+  }
+    
+  .footer-description {
     font-size: 0.85rem;
   }
 }

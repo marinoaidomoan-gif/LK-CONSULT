@@ -256,3 +256,51 @@ const anneeCourante = document.getElementById('annee-courante');
 if (anneeCourante) {
   anneeCourante.textContent = new Date().getFullYear();
 }
+
+// ============================================
+// ANIMATION MISSION & VISION (au scroll)
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+  const panneauxMV = document.querySelectorAll('.panneau-mv');
+  if (!panneauxMV.length) return;
+
+  const observateurMV = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observateurMV.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.2,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  panneauxMV.forEach((panneau) => observateurMV.observe(panneau));
+});
+
+// ============================================
+// ANIMATION EXPERTISES (au scroll)
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+  const cartesExpertise = document.querySelectorAll('.carte-expertise');
+  if (!cartesExpertise.length) return;
+
+  const observateurExpertise = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const index = Array.from(cartesExpertise).indexOf(entry.target);
+        // Délai progressif pour effet cascade (60ms entre chaque carte)
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, index * 60);
+        observateurExpertise.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -30px 0px'
+  });
+
+  cartesExpertise.forEach((carte) => observateurExpertise.observe(carte));
+});
