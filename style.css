@@ -2068,6 +2068,9 @@ section[id] {
   .pied-page {
     padding: 40px 0 20px;
   }
+  .hero-contenu{
+    margin-top: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
