@@ -97,24 +97,35 @@ h3 { font-size: 1.35rem; }
   border-radius: 3px;
 }
 
-/*=== En-tête et Navigation ===*/
+/* ============================================
+   EN-TÊTE — flotte transparent sur le Hero,
+   devient opaque au scroll (classe .en-tete-scroll
+   ajoutée par script.js)
+   ============================================ */
 .en-tete {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.92);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.en-tete.en-tete-scroll {
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--gris-200);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 .barre-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
+  padding: 18px 0;
   height: 85px;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .logo {
@@ -124,11 +135,19 @@ h3 { font-size: 1.35rem; }
   flex-shrink: 0;
 }
 
+/* Ombre portée légère (pas de bloc/case) directement sur les formes du
+   logo, pour l'aider à ressortir sur une photo tant que le header est
+   transparent. Disparaît une fois le header opaque. */
+.en-tete:not(.en-tete-scroll) .logo-image {
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.45));
+}
+
 .logo-image {
   height: 75px;
-    width: auto;
-    max-width: 200px;
-    display: block;
+  width: auto;
+  max-width: 200px;
+  display: block;
+  margin-left: 1rem;
 }
 
 /* ===== Menu ===== */
@@ -137,22 +156,26 @@ h3 { font-size: 1.35rem; }
   display: flex;
   gap: 36px;
   align-items: center;
+  margin-right: 2rem;
 }
 
 .menu-lien {
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--gris-700);
+  color: var(--blanc);
   position: relative;
   padding: 4px 0;
   transition: color var(--transition);
 }
 
-.menu-lien:hover {
-  color: var(--couleur-primaire);
+.en-tete-scroll .menu-lien {
+  color: var(--gris-700);
 }
 
-/* Ligne animée sous le lien */
+.menu-lien:hover {
+  color: var(--couleur-accent);
+}
+
 .menu-lien::after {
   content: "";
   position: absolute;
@@ -175,8 +198,14 @@ h3 { font-size: 1.35rem; }
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: var(--noir);
+  color: var(--blanc);
   padding: 4px;
+  margin-right: 1.5rem;
+  transition: color var(--transition);
+}
+
+.en-tete-scroll .bouton-menu-mobile {
+  color: var(--noir);
 }
 
 .bouton-menu-mobile:focus-visible {
@@ -186,40 +215,74 @@ h3 { font-size: 1.35rem; }
 }
 
 /* ============================================
-   HERO (ACCUEIL)
+   HERO (ACCUEIL) — plein écran, fond photo en
+   fondu enchaîné
    ============================================ */
 .hero {
   position: relative;
-  padding: 80px 0 120px;
-  background: linear-gradient(180deg, var(--gris-50) 0%, var(--blanc) 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
   overflow: hidden;
+  isolation: isolate;
 }
 
-.hero-grille {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 60px;
-  align-items: center;
+.hero-fond {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.hero-fond-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  animation: hero-fondu 36s ease-in-out infinite;
+}
+
+.hero-fond-image:nth-child(1) { background-image: url('img/bg/bg11.jpg'); animation-delay: 0s; }
+.hero-fond-image:nth-child(2) { background-image: url('img/bg/bg2.jpg'); animation-delay: 6s; }
+.hero-fond-image:nth-child(3) { background-image: url('img/bg/bg3.jpg'); animation-delay: 12s; }
+.hero-fond-image:nth-child(4) { background-image: url('img/bg/bg8.jpg'); animation-delay: 18s; }
+.hero-fond-image:nth-child(5) { background-image: url('img/bg/bg9.jpg'); animation-delay: 24s; }
+.hero-fond-image:nth-child(6) { background-image: url('img/bg/bg4.jpg'); animation-delay: 30s; }
+
+@keyframes hero-fondu {
+  0%   { opacity: 0; }
+  4%   { opacity: 1; }
+  12%  { opacity: 1; }
+  17%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Dégradé de marque : sombre côté texte (gauche), s'éclaircit vers la
+   droite pour laisser voir la photo */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    100deg,
+    rgba(5, 10, 30, 0.82) 0%,
+    rgba(0, 51, 160, 0.48) 32%,
+    rgba(0, 20, 60, 0.14) 58%,
+    rgba(0, 0, 0, 0.04) 100%
+  );
+}
+
+.hero-contenu-conteneur {
   position: relative;
-  z-index: 2;
+  z-index: 1;
+  padding: 160px 0 100px;
+  width: 100%;
 }
 
-.hero-etiquette {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: var(--blanc);
-  border: 1px solid var(--gris-200);
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--gris-700);
-  margin-bottom: 24px;
-}
-
-.hero-etiquette i {
-  color: var(--couleur-accent);
+.hero-contenu {
+  max-width: 640px;
+  margin-left: 2.5rem;
 }
 
 .hero-titre {
@@ -227,18 +290,18 @@ h3 { font-size: 1.35rem; }
   font-size: clamp(2.5rem, 5vw, 4.25rem);
   letter-spacing: -0.02em;
   line-height: 1.1;
-  color: var(--noir);
+  color: var(--blanc);
 }
 
 .hero-titre span {
-  color: var(--couleur-primaire);
+  color: #ffcb99;
   font-style: italic;
 }
 
 .hero-texte {
   margin: 24px 0 36px;
   font-size: 1.1rem;
-  color: var(--gris-600);
+  color: rgba(255, 255, 255, 0.85);
   max-width: 540px;
   line-height: 1.7;
   text-align: left;
@@ -250,42 +313,129 @@ h3 { font-size: 1.35rem; }
   flex-wrap: wrap;
 }
 
+/* ===== Statistiques : bandeau verre dépoli, mis en avant ===== */
 .hero-stats {
   display: flex;
-  gap: 40px;
-  margin-top: 56px;
-  padding-top: 32px;
-  border-top: 1px solid var(--gris-200);
+  gap: 0;
+  margin-top: 52px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: var(--rayon-lg);
+  padding: 26px 10px;
+  max-width: 620px;
 }
 
 .hero-stats .stat {
+  flex: 1;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 0 18px;
+  position: relative;
+}
+
+.hero-stats .stat + .stat::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.stat-icone {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--rayon-md);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--couleur-accent);
+  font-size: 1.05rem;
+  flex-shrink: 0;
 }
 
 .stat-nombre {
   font-family: var(--police-titre);
-  font-size: 2.25rem;
+  font-size: 1.9rem;
   font-weight: 700;
-  color: var(--couleur-primaire);
+  color: var(--blanc);
   margin: 0;
+  line-height: 1;
 }
 
 .stat-libelle {
-  font-size: 0.85rem;
-  color: var(--gris-600);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.75);
   margin-top: 4px;
   font-weight: 400;
 }
 
-.hero-visuel {
-  position: relative;
-  height: 520px;
+/* ============================================
+   Ancrage propre avec header fixe : évite que le
+   titre d'une section atterrisse caché sous le
+   header lors d'un clic sur un lien de menu
+   ============================================ */
+section[id] {
+  scroll-margin-top: 100px;
 }
 
-.hero-svg {
-  width: 100%;
-  height: 100%;
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 900px) {
+  .hero-contenu-conteneur {
+    padding: 140px 0 80px;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero {
+    min-height: 92vh;
+  }
+  .hero-stats {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    padding: 22px 20px;
+  }
+  .hero-stats .stat {
+    padding: 0;
+  }
+  .hero-stats .stat + .stat::before {
+    display: none;
+  }
+  .hero-contenu{
+    margin-left: 1rem;
+    margin-top: -5rem;
+  }
+  .bouton-primaire{
+    margin-left: -0.5rem;
+  }
+  .bouton-secondaire{
+    margin-left: -0.5rem;
+  }
+  .hero-stats{
+    margin-left: -0.5rem;
+    max-width: 340px;
+  }
+}
+
+/* Accessibilité : coupe le fondu photo pour "mouvement réduit",
+   affiche simplement la première image, statique */
+@media (prefers-reduced-motion: reduce) {
+  .hero-fond-image {
+    animation: none;
+  }
+  .hero-fond-image:first-child {
+    opacity: 1;
+  }
 }
 
 /* ============================================

@@ -304,3 +304,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
   cartesExpertise.forEach((carte) => observateurExpertise.observe(carte));
 });
+
+// ============================================
+// EN-TÊTE : passage en mode "solide" au scroll
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+  const entete = document.querySelector('.en-tete');
+  if (!entete) return;
+
+  const seuilDefilement = 60; // px avant de basculer en mode opaque
+  let enAttente = false;
+
+  function mettreAJourEntete() {
+    entete.classList.toggle('en-tete-scroll', window.scrollY > seuilDefilement);
+    enAttente = false;
+  }
+
+  mettreAJourEntete(); // état correct dès le chargement (ex: page rechargée après un scroll)
+
+  window.addEventListener('scroll', () => {
+    if (!enAttente) {
+      requestAnimationFrame(mettreAJourEntete);
+      enAttente = true;
+    }
+  }, { passive: true });
+});
