@@ -227,6 +227,16 @@ h3 { font-size: 1.35rem; }
   isolation: isolate;
 }
 
+/* Overlay sombre uniforme pour la lisibilité du texte */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(0, 0, 0, 0.30);
+  pointer-events: none;
+}
+
 .hero-fond {
   position: absolute;
   inset: 0;
@@ -1489,7 +1499,7 @@ section[id] {
   font-family: var(--police-corps);
   font-size: 0.95rem;
   font-weight: 600;
-  padding: 14px 28px;
+  padding: 14px 32px;
   border-radius: var(--rayon-md);
   border: 1.5px solid transparent;
   cursor: pointer;
@@ -1510,15 +1520,16 @@ section[id] {
 }
  
 .bouton-secondaire {
-  background: var(--blanc);
-  color: var(--noir);
-  border-color: var(--gris-300);
+  background: transparent;
+  color: var(--blanc);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
 }
- 
 .bouton-secondaire:hover {
-  border-color: var(--couleur-primaire);
-  color: var(--couleur-primaire);
+  border-color: var(--couleur-accent);
+  color: var(--couleur-accent);
   transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.08);
 }
  
 .bouton-accent {
