@@ -329,3 +329,67 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }, { passive: true });
 });
+
+// ============================================
+// HERO — Carrousel : points, flèches, pause au survol
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+  const hero = document.querySelector('.hero');
+  const images = document.querySelectorAll('.hero-fond-image');
+  const points = document.querySelectorAll('.hero-point');
+  const flecheGauche = document.querySelector('.hero-fleche-gauche');
+  const flecheDroite = document.querySelector('.hero-fleche-droite');
+
+  if (!hero || !images.length) return;
+
+  let indexActuel = 0;
+  let intervalle = null;
+  const dureeParImage = 6000; // 6s par image (entre les 5-7s recommandés)
+  const reduireMouvement = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function afficherImage(index) {
+    images.forEach((img, i) => img.classList.toggle('actif', i === index));
+    points.forEach((point, i) => {
+      point.classList.toggle('actif', i === index);
+      point.setAttribute('aria-current', i === index ? 'true' : 'false');
+    });
+    indexActuel = index;
+  }
+
+  function imageSuivante() {
+    afficherImage((indexActuel + 1) % images.length);
+  }
+
+  function imagePrecedente() {
+    afficherImage((indexActuel - 1 + images.length) % images.length);
+  }
+
+  function demarrerDefilement() {
+    if (reduireMouvement) return; // respecte "mouvement réduit" : pas de défilement auto
+    arreterDefilement();
+    intervalle = setInterval(imageSuivante, dureeParImage);
+  }
+
+  function arreterDefilement() {
+    if (intervalle) {
+      clearInterval(intervalle);
+      intervalle = null;
+    }
+  }
+
+  afficherImage(0);
+  demarrerDefilement();
+
+  // Pause au survol de toute la zone Hero
+  hero.addEventListener('mouseenter', arreterDefilement);
+  hero.addEventListener('mouseleave', demarrerDefilement);
+
+  // Flèches
+  flecheDroite?.addEventListener('click', () => { imageSuivante(); demarrerDefilement(); });
+  flecheGauche?.addEventListener('click', () => { imagePrecedente(); demarrerDefilement(); });
+
+  // Points
+  points.forEach((point, i) => {
+    point.addEventListener('click', () => { afficherImage(i); demarrerDefilement(); });
+  });
+});

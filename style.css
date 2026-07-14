@@ -240,22 +240,84 @@ h3 { font-size: 1.35rem; }
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
-  animation: hero-fondu 36s ease-in-out infinite;
+  transition: opacity 1.2s ease;
 }
 
-.hero-fond-image:nth-child(1) { background-image: url('img/bg/bg11.jpg'); animation-delay: 0s; }
-.hero-fond-image:nth-child(2) { background-image: url('img/bg/bg2.jpg'); animation-delay: 6s; }
-.hero-fond-image:nth-child(3) { background-image: url('img/bg/bg3.jpg'); animation-delay: 12s; }
-.hero-fond-image:nth-child(4) { background-image: url('img/bg/bg8.jpg'); animation-delay: 18s; }
-.hero-fond-image:nth-child(5) { background-image: url('img/bg/bg9.jpg'); animation-delay: 24s; }
-.hero-fond-image:nth-child(6) { background-image: url('img/bg/bg4.jpg'); animation-delay: 30s; }
+.hero-fond-image.actif {
+  opacity: 1;
+}
 
-@keyframes hero-fondu {
-  0%   { opacity: 0; }
-  4%   { opacity: 1; }
-  12%  { opacity: 1; }
-  17%  { opacity: 0; }
-  100% { opacity: 0; }
+.hero-fond-image:nth-child(1) { background-image: url('img/bg/bg11.jpg'); }
+.hero-fond-image:nth-child(2) { background-image: url('img/bg/bg2.jpg'); }
+.hero-fond-image:nth-child(3) { background-image: url('img/bg/bg3.jpg'); }
+.hero-fond-image:nth-child(4) { background-image: url('img/bg/bg4.jpg'); }
+.hero-fond-image:nth-child(5) { background-image: url('img/bg/bg8.jpg'); }
+.hero-fond-image:nth-child(6) { background-image: url('img/bg/bg9.jpg'); }
+
+/* Flèches */
+.hero-fleche {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  color: var(--blanc);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity var(--transition), background var(--transition), transform 0.25s ease;
+}
+
+.hero:hover .hero-fleche {
+  opacity: 1;
+}
+
+.hero-fleche:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.hero-fleche-gauche { left: 24px; }
+.hero-fleche-droite { right: 24px; }
+
+/* Points */
+.hero-indicateurs {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  gap: 10px;
+}
+
+.hero-point {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background var(--transition), width var(--transition);
+}
+
+.hero-point:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.hero-point.actif {
+  background: var(--couleur-accent);
+  width: 26px;
+  border-radius: 5px;
 }
 
 /* Dégradé de marque : sombre côté texte (gauche), s'éclaircit vers la
@@ -276,7 +338,7 @@ h3 { font-size: 1.35rem; }
 .hero-contenu-conteneur {
   position: relative;
   z-index: 1;
-  padding: 160px 0 100px;
+  padding: 160px 0 80px;
   width: 100%;
 }
 
@@ -328,7 +390,7 @@ h3 { font-size: 1.35rem; }
 }
 
 .hero-stats .stat {
-  flex: 1;
+  flex: 1 1 auto;
   display: flex;
   align-items: center;
   gap: 14px;
@@ -424,6 +486,13 @@ section[id] {
   .hero-stats{
     margin-left: -0.5rem;
     max-width: 340px;
+  }
+  /*hero-flèche*/
+  .hero-fleche {
+    display: none; /* le swipe tactile suffit sur mobile, les flèches encombrent */
+  }
+  .hero-indicateurs {
+    bottom: 18px;
   }
 }
 
@@ -757,6 +826,15 @@ section[id] {
   font-weight: 600;
   color: var(--noir);
   font-size: 0.95rem;
+}
+
+/* Style du surtitre dans la section À propos */
+.apropos-contenu .surtitre {
+  color: var(--couleur-accent);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
 }
 
 /* ============================================
@@ -2087,6 +2165,15 @@ section[id] {
   }
   .hero-visuel {
     height: 240px;
+  }
+  
+  .hero-contenu-conteneur {
+    padding: 100px 0 60px;
+  }
+
+  .hero-stats .stat {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .section {
