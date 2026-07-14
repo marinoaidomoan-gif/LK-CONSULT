@@ -393,3 +393,37 @@ document.addEventListener('DOMContentLoaded', function() {
     point.addEventListener('click', () => { afficherImage(i); demarrerDefilement(); });
   });
 });
+
+// ============================================
+// MENU — État actif (Active State)
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+  const liens = document.querySelectorAll('.menu-lien');
+  const sections = document.querySelectorAll('section[id]');
+
+  // Fonction pour mettre à jour le lien actif
+  function mettreAJourLienActif() {
+    let sectionActuelle = '';
+    const scrollY = window.scrollY + 120; // Décalage pour tenir compte du header fixe
+
+    sections.forEach(section => {
+      const debut = section.offsetTop;
+      const fin = debut + section.offsetHeight;
+      if (scrollY >= debut && scrollY < fin) {
+        sectionActuelle = section.id;
+      }
+    });
+
+    liens.forEach(lien => {
+      lien.classList.remove('actif');
+      if (lien.getAttribute('href') === '#' + sectionActuelle) {
+        lien.classList.add('actif');
+      }
+    });
+  }
+
+  // Déclencher au scroll et au chargement
+  window.addEventListener('scroll', mettreAJourLienActif);
+  window.addEventListener('load', mettreAJourLienActif);
+  mettreAJourLienActif();
+});

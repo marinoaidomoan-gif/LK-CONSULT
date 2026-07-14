@@ -125,7 +125,7 @@ h3 { font-size: 1.35rem; }
   align-items: center;
   justify-content: space-between;
   padding: 18px 0;
-  height: 85px;
+  height: 80px;
 }
 
 .logo {
@@ -191,6 +191,16 @@ h3 { font-size: 1.35rem; }
   width: 100%;
 }
 
+/* État actif du lien (page courante) */
+.menu-lien.actif {
+  color: var(--couleur-accent);
+}
+
+.menu-lien.actif::after {
+  width: 100%;
+  background: var(--couleur-accent);
+}
+
 /* ===== Bouton hamburger (mobile) ===== */
 .bouton-menu-mobile {
   display: none;
@@ -215,6 +225,40 @@ h3 { font-size: 1.35rem; }
 }
 
 /* ============================================
+   MENU — Transformation du bouton Contact
+   ============================================ */
+.menu-lien-contact {
+  background: transparent !important;
+  color: var(--blanc) !important;
+  padding: 8px 20px !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: 50px !important;
+  transition: all var(--transition);
+}
+
+.en-tete-scroll .menu-lien-contact {
+  color: var(--gris-700) !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+.menu-lien-contact:hover {
+  background: var(--couleur-accent) !important;
+  border-color: var(--couleur-accent) !important;
+  color: var(--blanc) !important;
+  transform: translateY(-2px);
+}
+
+.menu-lien-contact::after {
+  display: none !important;
+}
+
+.menu-lien-contact.actif {
+  background: var(--couleur-accent) !important;
+  border-color: var(--couleur-accent) !important;
+  color: var(--blanc) !important;
+}
+
+/* ============================================
    HERO (ACCUEIL) — plein écran, fond photo en
    fondu enchaîné
    ============================================ */
@@ -225,6 +269,24 @@ h3 { font-size: 1.35rem; }
   align-items: center;
   overflow: hidden;
   isolation: isolate;
+}
+
+/* Dégradé sombre en haut du Hero pour la lisibilité du menu */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.60) 0%,
+    rgba(0, 0, 0, 0.25) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
 }
 
 /* Overlay sombre uniforme pour la lisibilité du texte */
@@ -444,9 +506,9 @@ h3 { font-size: 1.35rem; }
 
 .stat-libelle {
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.92);
   margin-top: 4px;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 /* ============================================
