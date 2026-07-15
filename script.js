@@ -427,3 +427,17 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('load', mettreAJourLienActif);
   mettreAJourLienActif();
 });
+
+// ============================================
+// ANNÉES D'EXPÉRIENCE — Calcul dynamique
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+  const element = document.getElementById('annees-experience');
+  if (!element) return;
+  
+  const anneeCreation = 2012;
+  const anneeActuelle = new Date().getFullYear();
+  const anneesExperience = anneeActuelle - anneeCreation;
+  
+  element.textContent = anneesExperience + ' ans';
+});

@@ -664,6 +664,11 @@ section[id] {
   transform: translateY(28px);
   transition: opacity 0.6s ease, transform 0.6s ease,
     box-shadow 0.3s ease, border-color 0.3s ease;
+
+  /*Harmonisation des hauteurs */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 /* État visible, ajouté par script.js au scroll */
@@ -719,6 +724,8 @@ section[id] {
 }
 
 .carte-expertise p {
+  flex: 1;
+  margin: 0;
   color: var(--gris-600);
   font-size: 0.95rem;
   line-height: 1.6;
@@ -806,11 +813,11 @@ section[id] {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 50%; /* Le dégradé couvre 50% de la hauteur en partant du bas */
+    height: 70%; /* Le dégradé couvre 50% de la hauteur en partant du bas */
     background: linear-gradient(
         to top,
-        rgba(0, 0, 0, 0.85) 0%,      /* Très sombre en bas pour la citation */
-        rgba(0, 51, 160, 0.55) 50%,  /* Bleu primaire qui s'intensifie */
+        rgba(0, 0, 0, 0.92) 0%,      /* Très sombre en bas pour la citation */
+        rgba(0, 51, 160, 0.60) 50%,  /* Bleu primaire qui s'intensifie */
         transparent 100%             /* Complètement transparent en haut pour voir le visage */
     );
     z-index: 2;
@@ -841,6 +848,8 @@ section[id] {
     line-height: 1.5;
     margin-bottom: 16px;
     color: var(--blanc);
+    border-left: 3px solid var(--couleur-accent);
+    border-left: 16px;
 }
 
 .contenu-citation cite {
@@ -868,7 +877,7 @@ section[id] {
   margin-top: 32px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px 32px;
+  gap: 28px 56px;
 }
 
 .liste-infos li {
@@ -887,11 +896,12 @@ section[id] {
 
 .info-libelle {
   display: block;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--gris-500);
+  color: var(--gris-600);
   margin-bottom: 2px;
+  font-weight: 600;
 }
 
 .info-valeur {
