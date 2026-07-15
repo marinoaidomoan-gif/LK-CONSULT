@@ -441,3 +441,45 @@ document.addEventListener('DOMContentLoaded', function() {
   
   element.textContent = anneesExperience + ' ans';
 });
+
+// ============================================
+// RÉALISATIONS — Filtres avec animation
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+  const boutonsFiltre = document.querySelectorAll('.filtre-bouton');
+  const cartes = document.querySelectorAll('.carte-realisation');
+  if (!boutonsFiltre.length || !cartes.length) return;
+
+  const dureeAnimation = 350; // doit correspondre à la transition CSS ci-dessus
+
+  boutonsFiltre.forEach((bouton) => {
+    bouton.addEventListener('click', () => {
+      const filtre = bouton.dataset.filtre;
+
+      boutonsFiltre.forEach((b) => {
+        b.classList.remove('actif');
+        b.setAttribute('aria-selected', 'false');
+      });
+      bouton.classList.add('actif');
+      bouton.setAttribute('aria-selected', 'true');
+
+      cartes.forEach((carte) => {
+        const correspond = filtre === 'tout' || carte.dataset.categorie === filtre;
+
+        if (correspond) {
+          carte.style.display = '';
+          requestAnimationFrame(() => {
+            carte.classList.remove('masquee');
+          });
+        } else {
+          carte.classList.add('masquee');
+          setTimeout(() => {
+            if (carte.classList.contains('masquee')) {
+              carte.style.display = 'none';
+            }
+          }, dureeAnimation);
+        }
+      });
+    });
+  });
+});

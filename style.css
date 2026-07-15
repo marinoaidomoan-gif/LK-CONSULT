@@ -940,7 +940,7 @@ section[id] {
 
 .grille-realisations {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 30px;
 }
 
@@ -1012,6 +1012,57 @@ section[id] {
 }
 .realisation-client i {
   color: var(--couleur-accent);
+}
+
+/* ============================================
+   RÉALISATIONS — Filtres
+   ============================================ */
+.filtres-realisations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin: 32px 0 48px;
+}
+
+.filtre-bouton {
+  font-family: var(--police-corps);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1.5px solid var(--gris-300);
+  background: var(--blanc);
+  color: var(--gris-700);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.filtre-bouton:hover {
+  border-color: var(--couleur-primaire);
+  color: var(--couleur-primaire);
+}
+
+.filtre-bouton.actif {
+  background: var(--couleur-primaire);
+  border-color: var(--couleur-primaire);
+  color: var(--blanc);
+}
+
+.carte-realisation.masquee {
+  opacity: 0;
+  transform: scale(0.92);
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .filtres-realisations {
+    gap: 8px;
+  }
+  .filtre-bouton {
+    font-size: 0.82rem;
+    padding: 8px 16px;
+  }
 }
 
 /* ============================================
@@ -1653,9 +1704,9 @@ section[id] {
   z-index: -1;
   background: linear-gradient(
     160deg,
-    rgba(0, 51, 160, 0.92) 0%,
-    rgba(0, 0, 0, 0.78) 55%,
-    rgba(255, 140, 0, 0.55) 100%
+    rgba(0, 51, 160, 0.95) 0%,
+    rgba(0, 0, 0, 0.85) 55%,
+    rgba(255, 140, 0, 0.65) 100%
   );
 }
 
@@ -1679,8 +1730,8 @@ section[id] {
 .grille-mv {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  margin-top: 20px;
+  gap: 40px;
+  margin-top: 24px;
 }
 
 /* Panneaux "verre dépoli" (glassmorphism) */
@@ -1690,7 +1741,7 @@ section[id] {
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-radius: var(--rayon-lg);
-  padding: 44px 38px;
+  padding: 48px 40px;
   transition: transform 0.35s ease, background var(--transition),
     border-color var(--transition), box-shadow 0.35s ease;
 
@@ -1720,8 +1771,8 @@ section[id] {
   width: 56px;
   height: 56px;
   border-radius: var(--rayon-md);
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(255, 140, 0, 0.40);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1729,6 +1780,29 @@ section[id] {
   color: var(--blanc);
   margin-bottom: 22px;
   transition: transform 0.35s ease, background var(--transition);
+}
+
+/* Icône Mission : bleu */
+.panneau-mv:first-child .panneau-mv-icone {
+  background: rgba(0, 51, 160, 0.25);
+  border: 1.5px solid rgba(0, 51, 160, 0.40);
+}
+
+/* Icône Vision : orange */
+.panneau-mv:last-child .panneau-mv-icone {
+  background: rgba(255, 140, 0, 0.20);
+  border: 1.5px solid rgba(255, 140, 0, 0.50);
+}
+
+/* Au survol : chaque icône prend la couleur de l'autre pour un effet dynamique */
+.panneau-mv:first-child:hover .panneau-mv-icone {
+  background: rgba(255, 140, 0, 0.25);
+  border-color: var(--couleur-accent);
+}
+
+.panneau-mv:last-child:hover .panneau-mv-icone {
+  background: rgba(0, 51, 160, 0.25);
+  border-color: var(--couleur-primaire);
 }
 
 .panneau-mv:hover .panneau-mv-icone {
@@ -1745,7 +1819,7 @@ section[id] {
 }
 
 .panneau-mv p {
-  color: rgba(255, 255, 255, 0.88);
+  color: #ffffff;
   font-size: 0.98rem;
   line-height: 1.75;
 }
