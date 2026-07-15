@@ -483,3 +483,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+// ============================================
+// RÉALISATIONS — Effet de clic (scale)
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+  const cartesRealisations = document.querySelectorAll('.carte-realisation');
+  cartesRealisations.forEach((carte) => {
+    carte.addEventListener('mousedown', function() {
+      this.style.transform = 'scale(0.98)';
+    });
+    carte.addEventListener('mouseup', function() {
+      this.style.transform = '';
+    });
+    carte.addEventListener('mouseleave', function() {
+      this.style.transform = '';
+    });
+  });
+});

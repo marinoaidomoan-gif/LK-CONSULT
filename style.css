@@ -978,10 +978,10 @@ section[id] {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .carte-realisation:hover .realisation-image img {
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
 .realisation-corps {
@@ -1002,6 +1002,11 @@ section[id] {
   font-size: 1.1rem;
   line-height: 1.35;
   margin-bottom: 14px;
+  transition: color 0.3s ease;
+}
+/* Le titre devient bleu au survol */
+.carte-realisation:hover .realisation-titre {
+  color: var(--couleur-primaire);
 }
 .realisation-client {
   font-size: 0.85rem;
@@ -1063,6 +1068,20 @@ section[id] {
     font-size: 0.82rem;
     padding: 8px 16px;
   }
+}
+
+/* ============================================
+   RÉALISATIONS — Bouton CTA
+   ============================================ */
+.realisations-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 48px;
+}
+
+.realisations-cta .bouton {
+    padding: 16px 40px;
+    font-size: 1rem;
 }
 
 /* ============================================
